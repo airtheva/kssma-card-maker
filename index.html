@@ -1,0 +1,207 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
+<title>kssmaCardMaker</title>
+<style type="text/css">
+body {
+	padding-top: 40px;
+}
+
+.center {
+	float: none;
+	margin: auto;
+}
+
+.well {
+	background-color: rgba(245, 245, 245, 0.8);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+	<div class="row">
+	
+		<div class="span3 well">
+			
+			<img id="sword" class="hide" src="./sword.png" />
+			<img id="skill" class="hide" src="./skill.png" />
+			<img id="magic" class="hide" src="./magic.png" />
+			<img id="fairy" class="hide" src="./fairy.png" />
+			<img id="superRare" class="hide" src="./superRare.png" />
+			<img id="superRarePlus" class="hide" src="./superRarePlus.png" />
+			选择图像：<input type="file" id="file" /><br />
+			<img id="image" width="100%" /><br />
+			图像缩放倍率：<input type="text" id="scale" value="1.0" /><br />
+			<input type="checkbox" id="isImageShowed" />显示图像<br />
+			<input type="checkbox" id="isFrameShowed" />显示边框<br />
+			<input type="radio" id="frameSuperRare" name="frame" checked="true" />SuperRare
+			<input type="radio" id="frameSuperRarePlus" name="frame" />SuperRare+<br />
+			<input type="checkbox" id="isCountryShowed" />显示阵营<br />
+			<input type="radio" id="countrySword" name="country" />剑城
+			<input type="radio" id="countrySkill" name="country" />技场<br />
+			<input type="radio" id="countryMagic" name="country" />魔派
+			<input type="radio" id="countryFairy" name="country" checked="true" />妖精<br />
+			<button id="startPreview">开始预览</button>
+			<button id="stopPreview">停止预览</button>
+			<button id="save">保存</button>
+		</div>
+	
+		<div class="span8 well" style="text-align: center;">
+		
+			<canvas id="canvas" class="center" width="640" height="896"></canvas>
+		
+		</div>
+	
+	</div>
+
+</div>
+
+<script type="text/javascript" src="./jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+var Canvas = {};
+
+Canvas.isMouseDown = false;
+Canvas.lastOffsetX = 0;
+Canvas.lastOffsetY = 0;
+
+Canvas.isPreviewing = false;
+
+Canvas.TranslateX = 0;
+Canvas.TranslateY = 0;
+
+Canvas.OnMouseDown = function(event) {
+	
+	Canvas.isMouseDown = true;
+	
+};
+
+Canvas.OnMouseMove = function(event) {
+	
+	//console.log(event);
+	
+	if(Canvas.isPreviewing && Canvas.isMouseDown) {
+		
+		Canvas.TranslateX += event.offsetX - Canvas.lastOffsetX;
+		Canvas.TranslateY += event.offsetY - Canvas.lastOffsetY;
+		
+	}
+	
+	Canvas.lastOffsetX = event.offsetX;
+	Canvas.lastOffsetY = event.offsetY;
+	
+};
+
+Canvas.OnMouseUp = function(event) {
+	
+	Canvas.isMouseDown = false;
+	
+};
+
+Canvas.Reset = function() {
+
+	Canvas.TranslateX = 0;
+	Canvas.TranslateY = 0;
+	
+};
+
+Canvas.SetIsPreview = function(isPreviewing) {
+	
+	Canvas.isPreviewing = isPreviewing;
+	
+};
+
+Canvas.Preview = function() {
+	
+	if(!Canvas.isPreviewing) {
+		return;
+	}
+	
+	var scale = parseFloat($('input#scale').val(), 10);
+	
+	var canvas = $('#canvas')[0].getContext('2d');
+	
+	canvas.fillStyle = 'rgba(255, 255, 255, 1.0)';
+	canvas.fillRect(0, 0, 640, 896);
+	
+	if($('input#isImageShowed').prop('checked') === true) {
+		var image = $('#image')[0];
+		canvas.drawImage(image, Canvas.TranslateX, Canvas.TranslateY, image.width * scale, image.height * scale);
+	}
+	
+	if($('input#isFrameShowed').prop('checked') === true) {
+		if($('input#frameSuperRare').prop('checked') === true) {
+			canvas.drawImage($('img#superRare')[0], 0, 0);
+		}
+		if($('input#frameSuperRarePlus').prop('checked') === true) {
+			canvas.drawImage($('img#superRarePlus')[0], 0, 0);
+		}
+	}
+	
+	if($('input#isCountryShowed').prop('checked') === true) {
+		if($('input#countrySword').prop('checked') === true) {
+			canvas.drawImage($('img#sword')[0], 0, 0);
+		}
+		if($('input#countrySkill').prop('checked') === true) {
+			canvas.drawImage($('img#skill')[0], 0, 0);
+		}
+		if($('input#countryMagic').prop('checked') === true) {
+			canvas.drawImage($('img#magic')[0], 0, 0);
+		}
+		if($('input#countryFairy').prop('checked') === true) {
+			canvas.drawImage($('img#fairy')[0], 0, 0);
+		}
+	}
+	
+};
+
+$(document).ready(function() {
+	
+	$('input#file').change(function(event) {
+		
+		var fileReader = new FileReader();
+		fileReader.onload = function(event) {
+			$('#image')[0].src = event.target.result;
+			Canvas.Reset();
+		};
+		fileReader.readAsDataURL(this.files[0]);
+		
+	});
+	
+	$('button#startPreview').click(function(event) {
+		
+		Canvas.SetIsPreview(true);
+		
+	})
+	
+	$('button#stopPreview').click(function(event) {
+		
+		Canvas.SetIsPreview(false);
+		
+	})
+	
+	$('button#save').click(function(event) {
+		
+		var canvas = $('#canvas')[0];
+		
+		window.open(canvas.toDataURL('image/png'));
+		
+	});
+	
+	$('#canvas').mousedown(Canvas.OnMouseDown);
+	
+	$('#canvas').mousemove(Canvas.OnMouseMove);
+	
+	$('#canvas').mouseup(Canvas.OnMouseUp);
+		
+	setInterval(Canvas.Preview, 30);
+	
+});
+
+</script>
+</body>
+</html>

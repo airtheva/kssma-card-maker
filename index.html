@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" />
-<title>kssmaCardMaker</title>
+<title>KSSMA Card Maker</title>
 <style type="text/css">
 body {
 	padding-top: 40px;
@@ -22,36 +22,63 @@ body {
 
 <div class="container">
 
-	<div class="row">
+	<div class="row" style="text-align: center;">
 	
-		<div class="span3 well">
+		<div class="span12">
+		
+			<div class="well">
 			
-			<img id="sword" class="hide" src="./sword.png" />
-			<img id="skill" class="hide" src="./skill.png" />
-			<img id="magic" class="hide" src="./magic.png" />
-			<img id="fairy" class="hide" src="./fairy.png" />
-			<img id="superRare" class="hide" src="./superRare.png" />
-			<img id="superRarePlus" class="hide" src="./superRarePlus.png" />
-			选择图像：<input type="file" id="file" /><br />
-			<img id="image" width="100%" /><br />
-			图像缩放倍率：<input type="text" id="scale" value="1.0" /><br />
-			<input type="checkbox" id="isImageShowed" />显示图像<br />
-			<input type="checkbox" id="isFrameShowed" />显示边框<br />
-			<input type="radio" id="frameSuperRare" name="frame" checked="true" />SuperRare
-			<input type="radio" id="frameSuperRarePlus" name="frame" />SuperRare+<br />
-			<input type="checkbox" id="isCountryShowed" />显示阵营<br />
-			<input type="radio" id="countrySword" name="country" />剑城
-			<input type="radio" id="countrySkill" name="country" />技场<br />
-			<input type="radio" id="countryMagic" name="country" />魔派
-			<input type="radio" id="countryFairy" name="country" checked="true" />妖精<br />
-			<button id="startPreview">开始预览</button>
-			<button id="stopPreview">停止预览</button>
-			<button id="save">保存</button>
+				<h1>KSSMA Card Maker</h1>
+				
+				<p>欢迎使用扩散性MA卡片制作工具。本应用为开源项目，托管在<a href="https://github.com/airtheva/kssma-card-maker">GitHub</a>上。关于所使用素材的说明详见README.md。欢迎感兴趣者Fork！</p>
+			
+				<p>使用说明：左边有许多的复选框，勾选将在生成图像时绘制该部分。点击左边的开始预览按钮，在右边的预览图像中拖动鼠标可以改变图像位置，滚动滚轮可以改变图像缩放倍率，调整完毕后点击左边的保存按钮保存图像。</p>
+			
+			</div>
+		
 		</div>
 	
-		<div class="span8 well" style="text-align: center;">
+	</div>
+
+	<div class="row">
+	
+		<div class="span3">
+			
+			<form class="well" action="#">
+			
+				<img id="sword" class="hide" src="./sword.png" />
+				<img id="skill" class="hide" src="./skill.png" />
+				<img id="magic" class="hide" src="./magic.png" />
+				<img id="fairy" class="hide" src="./fairy.png" />
+				<img id="superRare" class="hide" src="./superRare.png" />
+				<img id="superRarePlus" class="hide" src="./superRarePlus.png" />
+				<label for="file">选择图像：</label><input type="file" id="file" />
+				<img id="image" width="100%" />
+				<label for="scale">图像缩放倍率：</label><input type="text" id="scale" value="1.00" style="width: 100%; height: 32px; text-align: center;" />
+				<label class="checkbox" for="isImageShowed"><input type="checkbox" id="isImageShowed" />显示图像</label>
+				<label class="checkbox" for="isFrameShowed"><input type="checkbox" id="isFrameShowed" />显示边框</label>
+				<label class="radio" for="frameSuperRare"><input type="radio" id="frameSuperRare" name="frame" checked="true" />SuperRare</label>
+				<label class="radio" for="frameSuperRarePlus"><input type="radio" id="frameSuperRarePlus" name="frame" />SuperRare+</label>
+				<label class="checkbox" for="isCountryShowed"><input type="checkbox" id="isCountryShowed" />显示阵营</label>
+				<label class="radio" for="countrySword"><input type="radio" id="countrySword" name="country" />剑城</label>
+				<label class="radio" for="countrySkill"><input type="radio" id="countrySkill" name="country" />技场</label>
+				<label class="radio" for="countryMagic"><input type="radio" id="countryMagic" name="country" />魔派</label>
+				<label class="radio" for="countryFairy"><input type="radio" id="countryFairy" name="country" checked="true" />妖精</label>
+				<button type="button" id="startPreview">开始预览</button>
+				<button type="button" id="stopPreview">停止预览</button>
+				<button type="button" id="save">保存</button>
+			
+			</form>
+			
+		</div>
+	
+		<div class="span9">
 		
+			<div class="well" style="text-align: center;">
+			
 			<canvas id="canvas" class="center" width="640" height="896"></canvas>
+		
+			</div>
 		
 		</div>
 	
@@ -102,6 +129,29 @@ Canvas.OnMouseUp = function(event) {
 	
 };
 
+Canvas.OnMouseWheel = function(event) {
+	
+	var $scale = $('input#scale');
+
+	// toFixed() is a fix for parseFloat().
+	
+	if(event.wheelDelta === 120) {
+		
+		$scale.val((parseFloat($scale.val(), 10) + 0.1).toFixed(2));
+		
+	}
+	
+	if(event.wheelDelta === -120) {
+		
+		$scale.val((parseFloat($scale.val(), 10) - 0.1).toFixed(2));
+		
+	}
+	
+	// Prevent page scrolling.
+	event.preventDefault(); // Works in Chrome.
+	
+};
+
 Canvas.Reset = function() {
 
 	Canvas.TranslateX = 0;
@@ -109,7 +159,7 @@ Canvas.Reset = function() {
 	
 };
 
-Canvas.SetIsPreview = function(isPreviewing) {
+Canvas.SetIsPreviewing = function(isPreviewing) {
 	
 	Canvas.isPreviewing = isPreviewing;
 	
@@ -174,13 +224,13 @@ $(document).ready(function() {
 	
 	$('button#startPreview').click(function(event) {
 		
-		Canvas.SetIsPreview(true);
+		Canvas.SetIsPreviewing(true);
 		
 	})
 	
 	$('button#stopPreview').click(function(event) {
 		
-		Canvas.SetIsPreview(false);
+		Canvas.SetIsPreviewing(false);
 		
 	})
 	
@@ -198,6 +248,8 @@ $(document).ready(function() {
 	
 	$('#canvas').mouseup(Canvas.OnMouseUp);
 		
+	$('#canvas')[0].onmousewheel = Canvas.OnMouseWheel;
+
 	setInterval(Canvas.Preview, 30);
 	
 });

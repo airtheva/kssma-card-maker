@@ -39,8 +39,10 @@ body {
 				
 				<p>欢迎使用扩散性MA卡片制作工具。本应用为开源项目，托管在<a href="https://github.com/airtheva/kssma-card-maker">GitHub</a>上。关于所使用素材的说明详见README.md。欢迎感兴趣者Fork！</p>
 			
-				<p>使用说明：左边有许多的复选框，勾选将在生成图像时绘制该部分。在右边的预览图像中拖动鼠标可以改变图像位置，滚动滚轮可以改变图像缩放倍率，调整完毕后点击左边的保存按钮保存图像。</p>
+				<p>本应用理论上可运行于支持HTML5的Canvas与File API的浏览器，使用Google Chrome浏览器以获得最佳体验。</p>
 			
+				<p>使用说明：左边有许多的复选框，勾选将在生成图像时绘制该部分。在右边的预览图像中拖动鼠标可以改变图像位置，滚动滚轮可以改变图像缩放倍率，调整完毕后点击左边的保存按钮保存图像。</p>
+				
 			</div>
 		
 		</div>
@@ -79,13 +81,13 @@ body {
 				<label for="scale">图像缩放倍率：</label><input type="text" id="scale" class="inputFix" value="1.00" />
 				<label class="checkbox" for="isImageShowed"><input type="checkbox" id="isImageShowed" checked="true" />显示图像</label>
 				<label class="checkbox" for="isFrameShowed"><input type="checkbox" id="isFrameShowed" checked="true" />显示边框</label>
-				<label class="radio" for="frameSuperRare"><input type="radio" name="frame" value="superRare" checked="true" />SuperRare</label>
-				<label class="radio" for="frameSuperRarePlus"><input type="radio" name="frame" value="superRarePlus" />SuperRare+</label>
+				<label class="radio" for="frameSuperRare"><input type="radio" id="frameSuperRare" name="frame" value="superRare" checked="true" />SuperRare</label>
+				<label class="radio" for="frameSuperRarePlus"><input type="radio" id="frameSuperRarePlus" name="frame" value="superRarePlus" />SuperRare+</label>
 				<label class="checkbox" for="isCountryShowed"><input type="checkbox" id="isCountryShowed" checked="true" />显示阵营</label>
-				<label class="radio" for="countrySword"><input type="radio" name="country" value="sword" />剑术之城</label>
-				<label class="radio" for="countryTech"><input type="radio" name="country" value="tech" />技巧之场</label>
-				<label class="radio" for="countryMagic"><input type="radio" name="country" value="magic" />魔法之派</label>
-				<label class="radio" for="countryFairy"><input type="radio" name="country" value="fairy" checked="true" />妖精</label>
+				<label class="radio" for="countrySword"><input type="radio" id="countrySword" name="country" value="sword" />剑术之城</label>
+				<label class="radio" for="countryTech"><input type="radio" id="countryTech" name="country" value="tech" />技巧之场</label>
+				<label class="radio" for="countryMagic"><input type="radio" id="countryMagic" name="country" value="magic" />魔法之派</label>
+				<label class="radio" for="countryFairy"><input type="radio" id="countryFairy" name="country" value="fairy" checked="true" />妖精</label>
 				<label class="checkbox" for="isCostShowed"><input type="checkbox" id="isCostShowed" checked="true" />显示COST</label>
 				<label for="cost">COST（目前仅支持6，8-20）：<input type="number" id="cost" class="inputFix" name="cost" value="20" /></label>
 				<label class="checkbox" for="isNameShowed"><input type="checkbox" id="isNameShowed" checked="true" />显示名称</label>

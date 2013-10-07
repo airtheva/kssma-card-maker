@@ -126,20 +126,30 @@ function UpdateNameCache() {
 	
 	context.font = 'bold 30px arial';
 	context.fillStyle = '#ffffff';
-	context.shadowColor = '#000000';
-	context.shadowBlur = 5;
 	var measure = context.measureText(name);
 	
-	canvas.width = measure.width;
+	canvas.width = measure.width + 2;
 	
 	var context = canvas.getContext('2d');
 	
 	context.font = 'bold 30px arial';
-	context.fillStyle = '#ffffff';
-	context.shadowColor = '#000000';
-	context.shadowBlur = 5;
 	
+	context.shadowColor = '#000000';
+	context.shadowBlur = 2;
+	
+	context.fillStyle = '#000000';
 	context.fillText(name, 0, 30);
+	context.fillText(name, 1, 30);
+	context.fillText(name, 2, 30);
+	context.fillText(name, 0, 31);
+	context.fillText(name, 1, 31);
+	context.fillText(name, 2, 31);
+	context.fillText(name, 0, 32);
+	context.fillText(name, 1, 32);
+	context.fillText(name, 2, 32);
+	
+	context.fillStyle = '#ffffff';
+	context.fillText(name, 1, 31);
 	
 	//context.fillText(name, 320 - measure.width / 2, 18 + 30);
 	//context.fillText(name, 320 - measure.width / 2, 18 + 30 - 1);
@@ -248,7 +258,7 @@ Canvas.Update = function() {
 		
 		var nameCache = $('canvas#nameCache')[0];
 		
-		canvas.drawImage(nameCache, 320 - nameCache.width / 2, 18);
+		canvas.drawImage(nameCache, 320 - nameCache.width / 2, 15);
 		
 	}
 	

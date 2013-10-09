@@ -34,12 +34,12 @@ body {
 		<div class="span12">
 		
 			<div class="well">
-			
+				
 				<h1>KSSMA Card Maker</h1>
 				
 				<p>欢迎使用扩散性MA卡片制作工具。本应用为开源项目，托管在<a href="https://github.com/airtheva/kssma-card-maker">GitHub</a>上。关于所使用素材的说明详见README.md。欢迎感兴趣者Fork！</p>
 			
-				<p>本应用理论上可运行于支持HTML5的Canvas与File API的浏览器，使用Google Chrome浏览器以获得最佳体验。</p>
+				<p>本应用理论上可运行于支持HTML5的CardCanvas与File API的浏览器，使用Google Chrome浏览器以获得最佳体验。</p>
 			
 				<p>使用说明：左边有许多的复选框，勾选将在生成图像时绘制该部分。在右边的预览图像中拖动鼠标可以改变图像位置，滚动滚轮可以改变图像缩放倍率，调整完毕后点击左边的保存按钮保存图像。</p>
 				
@@ -54,45 +54,55 @@ body {
 		<div class="span3">
 			
 			<form class="well" action="#">
-			
-				<img id="superRare" class="hide" src="./resources/rarity/superRare.png" />
-				<img id="superRarePlus" class="hide" src="./resources/rarity/superRarePlus.png" />
-				<img id="sword" class="hide" src="./resources/country/sword.png" />
-				<img id="tech" class="hide" src="./resources/country/tech.png" />
-				<img id="magic" class="hide" src="./resources/country/magic.png" />
-				<img id="fairy" class="hide" src="./resources/country/fairy.png" />
-				<img id="6" class="hide" src="./resources/cost/6.png" />
-				<img id="8" class="hide" src="./resources/cost/8.png" />
-				<img id="9" class="hide" src="./resources/cost/9.png" />
-				<img id="10" class="hide" src="./resources/cost/10.png" />
-				<img id="11" class="hide" src="./resources/cost/11.png" />
-				<img id="12" class="hide" src="./resources/cost/12.png" />
-				<img id="13" class="hide" src="./resources/cost/13.png" />
-				<img id="14" class="hide" src="./resources/cost/14.png" />
-				<img id="15" class="hide" src="./resources/cost/15.png" />
-				<img id="16" class="hide" src="./resources/cost/16.png" />
-				<img id="17" class="hide" src="./resources/cost/17.png" />
-				<img id="18" class="hide" src="./resources/cost/18.png" />
-				<img id="19" class="hide" src="./resources/cost/19.png" />
-				<img id="20" class="hide" src="./resources/cost/20.png" />
+				<img id="faceCountry-sword" class="hide" src="./resources/face/country/sword.png" />
+				<img id="faceCountry-tech" class="hide" src="./resources/face/country/tech.png" />
+				<img id="faceCountry-magic" class="hide" src="./resources/face/country/magic.png" />
+				<img id="faceCountry-fairy" class="hide" src="./resources/face/country/fairy.png" />
+				<img id="faceRarity-5" class="hide" src="./resources/face/rarity/5.png" />
+				<img id="faceRarity-6" class="hide" src="./resources/face/rarity/6.png" />
+				
+				<img id="cardFrame-5" class="hide" src="./resources/card/frame/5.png" />
+				<img id="cardFrame-6" class="hide" src="./resources/card/frame/6.png" />
+				<img id="cardCountry-sword" class="hide" src="./resources/card/country/sword.png" />
+				<img id="cardCountry-tech" class="hide" src="./resources/card/country/tech.png" />
+				<img id="cardCountry-magic" class="hide" src="./resources/card/country/magic.png" />
+				<img id="cardCountry-fairy" class="hide" src="./resources/card/country/fairy.png" />
+				<img id="cardCost-6" class="hide" src="./resources/card/cost/6.png" />
+				<img id="cardCost-8" class="hide" src="./resources/card/cost/8.png" />
+				<img id="cardCost-9" class="hide" src="./resources/card/cost/9.png" />
+				<img id="cardCost-10" class="hide" src="./resources/card/cost/10.png" />
+				<img id="cardCost-11" class="hide" src="./resources/card/cost/11.png" />
+				<img id="cardCost-12" class="hide" src="./resources/card/cost/12.png" />
+				<img id="cardCost-13" class="hide" src="./resources/card/cost/13.png" />
+				<img id="cardCost-14" class="hide" src="./resources/card/cost/14.png" />
+				<img id="cardCost-15" class="hide" src="./resources/card/cost/15.png" />
+				<img id="cardCost-16" class="hide" src="./resources/card/cost/16.png" />
+				<img id="cardCost-17" class="hide" src="./resources/card/cost/17.png" />
+				<img id="cardCost-18" class="hide" src="./resources/card/cost/18.png" />
+				<img id="cardCost-19" class="hide" src="./resources/card/cost/19.png" />
+				<img id="cardCost-20" class="hide" src="./resources/card/cost/20.png" />
 				<canvas id="nameCache" class="hide"></canvas>
 				<label for="file">选择图像：</label><input type="file" id="file" />
 				<img id="image" width="100%" />
-				<label for="scale">图像缩放倍率：</label><input type="text" id="scale" class="inputFix" value="1.00" />
-				<label class="checkbox" for="isImageShowed"><input type="checkbox" id="isImageShowed" checked="true" />显示图像</label>
-				<label class="checkbox" for="isFrameShowed"><input type="checkbox" id="isFrameShowed" checked="true" />显示边框</label>
-				<label class="radio" for="frameSuperRare"><input type="radio" id="frameSuperRare" name="frame" value="superRare" checked="true" />SuperRare</label>
-				<label class="radio" for="frameSuperRarePlus"><input type="radio" id="frameSuperRarePlus" name="frame" value="superRarePlus" />SuperRare+</label>
-				<label class="checkbox" for="isCountryShowed"><input type="checkbox" id="isCountryShowed" checked="true" />显示阵营</label>
+				<label for="type">类型：</label>
+				<select id="type" class="inputFix">
+				<option value="0" selected="true">国服 & 台服</option>
+				<option value="1">韩服</option>
+				</select>
+				<label for="faceImageScale">头像图像缩放倍率：</label><input type="text" id="faceImageScale" class="inputFix" value="5.00" />
+				<label for="cardImageScale">卡片图像缩放倍率：</label><input type="text" id="cardImageScale" class="inputFix" value="5.00" />
+				<label>选择稀有度：</label>
+				<label class="radio" for="raritySuperRare"><input type="radio" id="raritySuperRare" name="rarity" value="5" checked="true" />SuperRare</label>
+				<label class="radio" for="raritySuperRarePlus"><input type="radio" id="raritySuperRarePlus" name="rarity" value="6" />SuperRare+</label>
+				<label>选择阵营：</label>
 				<label class="radio" for="countrySword"><input type="radio" id="countrySword" name="country" value="sword" />剑术之城</label>
 				<label class="radio" for="countryTech"><input type="radio" id="countryTech" name="country" value="tech" />技巧之场</label>
 				<label class="radio" for="countryMagic"><input type="radio" id="countryMagic" name="country" value="magic" />魔法之派</label>
 				<label class="radio" for="countryFairy"><input type="radio" id="countryFairy" name="country" value="fairy" checked="true" />妖精</label>
-				<label class="checkbox" for="isCostShowed"><input type="checkbox" id="isCostShowed" checked="true" />显示COST</label>
-				<label for="cost">COST（目前仅支持6，8-20）：<input type="number" id="cost" class="inputFix" name="cost" value="20" /></label>
-				<label class="checkbox" for="isNameShowed"><input type="checkbox" id="isNameShowed" checked="true" />显示名称</label>
+				<label for="cost">选择COST（目前仅支持6，8-20）：<input type="number" id="cost" class="inputFix" name="cost" value="20" /></label>
 				<label for="name">名称：</label><input type="text" id="name" class="inputFix" value="奇怪的卡片" checked="true" />
-				<button type="button" id="save">保存</button>
+				<button type="button" id="saveFace">保存头像</button>
+				<button type="button" id="saveCard">保存卡片</button>
 			
 			</form>
 			
@@ -102,7 +112,13 @@ body {
 		
 			<div class="well" style="text-align: center;">
 			
-			<canvas id="canvas" class="center" width="640" height="896"></canvas>
+				<canvas id="face" class="center" width="192" height="192"></canvas>
+		
+			</div>
+		
+			<div class="well" style="text-align: center;">
+			
+				<canvas id="card" class="center" width="640" height="896"></canvas>
 		
 			</div>
 		
@@ -118,13 +134,25 @@ body {
 
 function UpdateNameCache() {
 	
+	var size = -1;
+	switch($('select#type').val()) {
+	case '0':
+		size = 15;
+		break;
+	case '1':
+		size = 30;
+		break;
+	default:
+		return;
+	}
+	
 	var name = $('input#name').val();
 	
 	var canvas = $('canvas#nameCache')[0];
 	
 	var context = canvas.getContext('2d');
 	
-	context.font = 'bold 30px arial';
+	context.font = 'bold ' + size + 'px arial';
 	context.fillStyle = '#ffffff';
 	var measure = context.measureText(name);
 	
@@ -132,24 +160,24 @@ function UpdateNameCache() {
 	
 	var context = canvas.getContext('2d');
 	
-	context.font = 'bold 30px arial';
+	context.font = 'bold ' + size + 'px arial';
 	
 	context.shadowColor = '#000000';
 	context.shadowBlur = 2;
 	
 	context.fillStyle = '#000000';
-	context.fillText(name, 0, 30);
-	context.fillText(name, 1, 30);
-	context.fillText(name, 2, 30);
-	context.fillText(name, 0, 31);
-	context.fillText(name, 1, 31);
-	context.fillText(name, 2, 31);
-	context.fillText(name, 0, 32);
-	context.fillText(name, 1, 32);
-	context.fillText(name, 2, 32);
+	context.fillText(name, 0, size);
+	context.fillText(name, 1, size);
+	context.fillText(name, 2, size);
+	context.fillText(name, 0, size + 1);
+	context.fillText(name, 1, size + 1);
+	context.fillText(name, 2, size + 1);
+	context.fillText(name, 0, size + 2);
+	context.fillText(name, 1, size + 2);
+	context.fillText(name, 2, size + 2);
 	
 	context.fillStyle = '#ffffff';
-	context.fillText(name, 1, 31);
+	context.fillText(name, 1, size + 1);
 	
 	//context.fillText(name, 320 - measure.width / 2, 18 + 30);
 	//context.fillText(name, 320 - measure.width / 2, 18 + 30 - 1);
@@ -158,46 +186,46 @@ function UpdateNameCache() {
 	
 };
 
-var Canvas = {};
+var FaceCanvas = {};
 
-Canvas.isMouseDown = false;
-Canvas.lastOffsetX = 0;
-Canvas.lastOffsetY = 0;
+FaceCanvas.isMouseDown = false;
+FaceCanvas.lastOffsetX = 0;
+FaceCanvas.lastOffsetY = 0;
 
-Canvas.TranslateX = 0;
-Canvas.TranslateY = 0;
+FaceCanvas.TranslateX = 0;
+FaceCanvas.TranslateY = 0;
 
-Canvas.OnMouseDown = function(event) {
+FaceCanvas.OnMouseDown = function(event) {
 	
-	Canvas.isMouseDown = true;
+	FaceCanvas.isMouseDown = true;
 	
 };
 
-Canvas.OnMouseMove = function(event) {
+FaceCanvas.OnMouseMove = function(event) {
 	
 	//console.log(event);
 	
-	if(Canvas.isMouseDown) {
+	if(FaceCanvas.isMouseDown) {
 		
-		Canvas.TranslateX += event.offsetX - Canvas.lastOffsetX;
-		Canvas.TranslateY += event.offsetY - Canvas.lastOffsetY;
+		FaceCanvas.TranslateX += event.offsetX - FaceCanvas.lastOffsetX;
+		FaceCanvas.TranslateY += event.offsetY - FaceCanvas.lastOffsetY;
 		
 	}
 	
-	Canvas.lastOffsetX = event.offsetX;
-	Canvas.lastOffsetY = event.offsetY;
+	FaceCanvas.lastOffsetX = event.offsetX;
+	FaceCanvas.lastOffsetY = event.offsetY;
 	
 };
 
-Canvas.OnMouseUp = function(event) {
+FaceCanvas.OnMouseUp = function(event) {
 	
-	Canvas.isMouseDown = false;
+	FaceCanvas.isMouseDown = false;
 	
 };
 
-Canvas.OnMouseWheel = function(event) {
+FaceCanvas.OnMouseWheel = function(event) {
 	
-	var $scale = $('input#scale');
+	var $scale = $('input#faceImageScale');
 
 	// toFixed() is a fix for parseFloat().
 	
@@ -218,49 +246,145 @@ Canvas.OnMouseWheel = function(event) {
 	
 };
 
-Canvas.Reset = function() {
+FaceCanvas.Reset = function() {
 
-	Canvas.TranslateX = 0;
-	Canvas.TranslateY = 0;
+	FaceCanvas.TranslateX = 0;
+	FaceCanvas.TranslateY = 0;
 	
 };
 
-Canvas.Update = function() {
+FaceCanvas.Update = function() {
 	
-	var scale = parseFloat($('input#scale').val(), 10);
+	var scale = parseFloat($('input#faceImageScale').val(), 10);
 	
-	var canvas = $('#canvas')[0].getContext('2d');
+	var canvas = $('canvas#face')[0].getContext('2d');
 	
 	canvas.fillStyle = 'rgba(255, 255, 255, 1.0)';
-	canvas.fillRect(0, 0, 640, 896);
+	canvas.fillRect(0, 0, 192, 192);
 	
-	if($('input#isImageShowed').prop('checked') === true) {
-		var image = $('#image')[0];
-		canvas.drawImage(image, Canvas.TranslateX, Canvas.TranslateY, image.width * scale, image.height * scale);
-	}
+	var image = $('#image')[0];
+	canvas.drawImage(image, FaceCanvas.TranslateX, FaceCanvas.TranslateY, image.width * scale, image.height * scale);
+
+	var rarity = $('input[name="rarity"]:checked').val();
+	canvas.drawImage($('img#faceRarity-' + rarity)[0], 0, 0);
+
+	var country = $('input[name="country"]:checked').val();
+	canvas.drawImage($('img#faceCountry-' + country)[0], 0, 0);
+
+};
+
+var CardCanvas = {};
+
+CardCanvas.isMouseDown = false;
+CardCanvas.lastOffsetX = 0;
+CardCanvas.lastOffsetY = 0;
+
+CardCanvas.TranslateX = 0;
+CardCanvas.TranslateY = 0;
+
+CardCanvas.OnMouseDown = function(event) {
 	
-	if($('input#isFrameShowed').prop('checked') === true) {
-		var frame = $('input[name="frame"]:checked').val();
-		canvas.drawImage($('img#' + frame)[0], 0, 0);
-	}
+	CardCanvas.isMouseDown = true;
 	
-	if($('input#isCountryShowed').prop('checked') === true) {
-		var country = $('input[name="country"]:checked').val();
-		canvas.drawImage($('img#' + country)[0], 0, 0);
-	}
+};
+
+CardCanvas.OnMouseMove = function(event) {
 	
-	if($('input#isCostShowed').prop('checked') === true) {
-		var cost = $('input#cost').val();
-		canvas.drawImage($('img#' + cost)[0], 0, 0);
-	}
+	//console.log(event);
 	
-	if($('input#isNameShowed').prop('checked') === true) {
+	if(CardCanvas.isMouseDown) {
 		
-		var nameCache = $('canvas#nameCache')[0];
-		
-		canvas.drawImage(nameCache, 320 - nameCache.width / 2, 15);
+		CardCanvas.TranslateX += event.offsetX - CardCanvas.lastOffsetX;
+		CardCanvas.TranslateY += event.offsetY - CardCanvas.lastOffsetY;
 		
 	}
+	
+	CardCanvas.lastOffsetX = event.offsetX;
+	CardCanvas.lastOffsetY = event.offsetY;
+	
+};
+
+CardCanvas.OnMouseUp = function(event) {
+	
+	CardCanvas.isMouseDown = false;
+	
+};
+
+CardCanvas.OnMouseWheel = function(event) {
+	
+	var $scale = $('input#cardImageScale');
+
+	// toFixed() is a fix for parseFloat().
+	
+	if(event.wheelDelta === 120) {
+		
+		$scale.val((parseFloat($scale.val(), 10) + 0.1).toFixed(2));
+		
+	}
+	
+	if(event.wheelDelta === -120) {
+		
+		$scale.val((parseFloat($scale.val(), 10) - 0.1).toFixed(2));
+		
+	}
+	
+	// Prevent page scrolling.
+	event.preventDefault(); // Works in Chrome.
+	
+};
+
+CardCanvas.Reset = function() {
+
+	CardCanvas.TranslateX = 0;
+	CardCanvas.TranslateY = 0;
+	
+};
+
+CardCanvas.Update = function() {
+	
+	var width = -1;
+	var height = -1;
+	var nameTop = -1;
+	switch($('select#type').val()) {
+	case '0':
+		width = 308;
+		height = 434;
+		nameTop = 6;
+		break;
+	case '1':
+		width = 640;
+		height = 896;
+		nameTop = 14;
+		break;
+	default:
+		return;
+	}
+	
+	var scale = parseFloat($('input#cardImageScale').val(), 10);
+	
+	var canvas = $('canvas#card')[0];
+	canvas.width = width;
+	canvas.height = height;
+	
+	var context = canvas.getContext('2d');
+	
+	context.fillStyle = 'rgba(255, 255, 255, 1.0)';
+	context.fillRect(0, 0, width, height);
+	
+	var image = $('#image')[0];
+	context.drawImage(image, CardCanvas.TranslateX, CardCanvas.TranslateY, image.width * scale, image.height * scale);
+
+	var rarity = $('input[name="rarity"]:checked').val();
+	context.drawImage($('img#cardFrame-' + rarity)[0], 0, 0, width, height);
+
+	var country = $('input[name="country"]:checked').val();
+	context.drawImage($('img#cardCountry-' + country)[0], 0, 0, width, height);
+
+	var cost = $('input#cost').val();
+	context.drawImage($('img#cardCost-' + cost)[0], 0, 0, width, height);
+
+	var nameCache = $('canvas#nameCache')[0];
+	context.drawImage(nameCache, width / 2 - nameCache.width / 2, nameTop);
 	
 };
 
@@ -271,31 +395,50 @@ $(document).ready(function() {
 		var fileReader = new FileReader();
 		fileReader.onload = function(event) {
 			$('img#image')[0].src = event.target.result;
-			Canvas.Reset();
+			FaceCanvas.Reset();
+			CardCanvas.Reset();
 		};
 		fileReader.readAsDataURL(this.files[0]);
 		
 	});
 	
-	$('button#save').click(function(event) {
+	$('button#saveFace').click(function(event) {
 		
-		var canvas = $('canvas#canvas')[0];
+		var face = $('canvas#face')[0];
 		
-		window.open(canvas.toDataURL('image/png'));
+		window.open(face.toDataURL('image/png'));
 		
 	});
 	
-	$('#canvas').mousedown(Canvas.OnMouseDown);
-	
-	$('#canvas').mousemove(Canvas.OnMouseMove);
-	
-	$('#canvas').mouseup(Canvas.OnMouseUp);
+	$('button#saveCard').click(function(event) {
 		
-	$('#canvas')[0].onmousewheel = Canvas.OnMouseWheel;
+		var face = $('canvas#face')[0];
+		
+		window.open(card.toDataURL('image/png'));
+		
+	});
+	
+	$('canvas#face').mousedown(FaceCanvas.OnMouseDown);
+	
+	$('canvas#face').mousemove(FaceCanvas.OnMouseMove);
+	
+	$('canvas#face').mouseup(FaceCanvas.OnMouseUp);
+		
+	$('canvas#face')[0].onmousewheel = FaceCanvas.OnMouseWheel;
+
+	setInterval(FaceCanvas.Update, 30);
+	
+	$('canvas#card').mousedown(CardCanvas.OnMouseDown);
+	
+	$('canvas#card').mousemove(CardCanvas.OnMouseMove);
+	
+	$('canvas#card').mouseup(CardCanvas.OnMouseUp);
+		
+	$('canvas#card')[0].onmousewheel = CardCanvas.OnMouseWheel;
 
 	setInterval(UpdateNameCache, 1000);
 	
-	setInterval(Canvas.Update, 30);
+	setInterval(CardCanvas.Update, 30);
 	
 });
 

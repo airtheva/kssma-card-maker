@@ -39,7 +39,7 @@ body {
 				
 				<p>欢迎使用扩散性MA卡片制作工具。本应用为开源项目，托管在<a href="https://github.com/airtheva/kssma-card-maker">GitHub</a>上。关于所使用素材的说明详见README.md。欢迎感兴趣者Fork！</p>
 			
-				<p>本应用理论上可运行于支持HTML5的CardCanvas与File API的浏览器，使用Google Chrome浏览器以获得最佳体验。</p>
+				<p>本应用理论上可运行于支持HTML5的Canvas与File API的浏览器，使用Google Chrome浏览器以获得最佳体验。</p>
 			
 				<p>使用说明：左边有许多的复选框，勾选将在生成图像时绘制该部分。在右边的预览图像中拖动鼠标可以改变图像位置，滚动滚轮可以改变图像缩放倍率，调整完毕后点击左边的保存按钮保存图像。</p>
 				
@@ -135,12 +135,15 @@ body {
 function UpdateNameCache() {
 	
 	var size = -1;
+	var shadowBlur = -1;
 	switch($('select#type').val()) {
 	case '0':
 		size = 15;
+		shadowBlur = 1;
 		break;
 	case '1':
 		size = 30;
+		shadowBlur = 2;
 		break;
 	default:
 		return;
@@ -163,7 +166,7 @@ function UpdateNameCache() {
 	context.font = 'bold ' + size + 'px arial';
 	
 	context.shadowColor = '#000000';
-	context.shadowBlur = 2;
+	context.shadowBlur = shadowBlur;
 	
 	context.fillStyle = '#000000';
 	context.fillText(name, 0, size);
